@@ -10,6 +10,7 @@ export default function CardDetails() {
   const details = useLoaderData();
   const { id } = useParams();
   const [cards, setCards] = useState(false);
+  const [isFav, setFav] = useState(false)
   const { addToCart } = useContext(CartContext);
  const{ cartItems} = useContext(CartContext)
 
@@ -34,6 +35,7 @@ const { addToFav } = useContext(FavContext)
             return toast.error('Item is already in the cart');    }
         else {
             addToFav(data);
+            setFav(true)
             return toast.success('Item added to cart');
         }
     }
@@ -51,7 +53,7 @@ const { addToFav } = useContext(FavContext)
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-center py-20 bg-gradient-to-r from-[#9538E2] to-[#9538E2] rounded-2xl pb-28">
+      <div className="flex flex-col items-center justify-center py-20 bg-gradient-to-r from-[#9538E2] to-[#9538E2] pb-28">
         <h1 className="text-3xl font-bold mb-4 text-white">Product Details</h1>
         <p className="text-base font-normal mb-8 text-white">
           Explore the latest gadgets that will take your experience to the next
@@ -118,6 +120,7 @@ const { addToFav } = useContext(FavContext)
 
             <button 
             onClick={()=> handleToAddFav(cards)}
+            disabled={isFav}
             className="btn rounded-full border-2 bg-white">
               <FaHeart />
             </button>

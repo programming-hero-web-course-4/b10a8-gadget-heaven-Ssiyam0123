@@ -14,11 +14,14 @@ import DashBoard from './components/Pages/DashBoard.jsx';
 import CardDetails from './components/Pages/CardDetails.jsx';
 import Cart from './components/Cart.jsx';
 import WishList from './components/WishList.jsx';
+import ErrorPage from './components/Pages/ErrorPage.jsx';
+
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage/>,
     children: [
       {
         path: '/',

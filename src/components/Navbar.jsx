@@ -1,7 +1,14 @@
 import { NavLink } from "react-router-dom";
 import { FaCartPlus, FaHeart } from "react-icons/fa";
+import { useContext } from "react";
+import { CartContext } from "./CartContext";
+import { FavContext } from "./FavouriteContext";
 
 export default function Navbar() {
+
+  const {cartItems} = useContext(CartContext)
+  const {favItem} = useContext(FavContext)
+
   const links = (
     <div className="space-x-5 sm:space-y-2">
       {/* <NavLink className={(e)=>{return e.isActive?'bg-red-600 btn text-white':'btn' }} to={'/'}>Home</NavLink>
@@ -58,9 +65,11 @@ export default function Navbar() {
           <NavLink to={"/dashboard"}>
             <FaCartPlus></FaCartPlus>
           </NavLink>
+            <span className="relative bottom-3 right-3  text-red-600">{cartItems.length}</span>
           <NavLink to={"/dashboard/wishlist"}>
             <FaHeart></FaHeart>
           </NavLink>
+          <span className="relative bottom-3 right-3  text-red-600">{favItem.length}</span>
         </div>
       </div>
     </div>

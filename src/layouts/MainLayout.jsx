@@ -4,11 +4,13 @@ import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 import { CartContext, CartProvider } from "../components/CartContext";
 import { FavProvider } from "../components/FavouriteContext";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function MainLayout() {
   return (
     <CartProvider>
       <FavProvider>
+        <ToastContainer />
         <div className="h-16">
           <Navbar></Navbar>
         </div>

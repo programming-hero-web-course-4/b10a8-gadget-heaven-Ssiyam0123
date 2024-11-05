@@ -1,70 +1,108 @@
-
-
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { CartContext } from "./CartContext";
 import { FavContext } from "./FavouriteContext";
-
+import { FaSort } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 export default function Cart() {
-    const { cartItems } = useContext(CartContext);
-    const [sorting, setSortBy] = useState([]);
+  const { cartItems, removeFromCart } = useContext(CartContext);
+  const [sorting, setSortBy] = useState([]);
+  const modalRef = useRef(null);
+  const handleBySort = (sort) => {
+    if (sort == "price") {
+      const sorted = [...sorting].sort((a, b) => b.price - a.price);
+      setSortBy(sorted);
+    }
+  };
 
-    const handleBySort = (sort) => {
-        if (sort == 'price') {
-            const sorted = [...sorting].sort((a, b) => b.price - a.price);
-            setSortBy(sorted);
-        }
-       
-    };
+  const handlePurchase = () => {
+    modalRef.current.showModal();
+    setTotal()
+  };
 
+  const [total, setTotal] = useState(0);
 
-    const [total, setTotal] = useState(0);
+  useEffect(() => {
+    setSortBy(cartItems);
+    const newTotal = cartItems.reduce((acc, item) => acc + item.price, 0);
+    setTotal(newTotal);
+  }, [cartItems]);
 
-    useEffect(() => {
-        setSortBy(cartItems); 
-        const newTotal = cartItems.reduce((acc, item) => acc + item.price, 0);
-        setTotal(newTotal);
-    }, [cartItems]);
-
-    return (
-        <div className="mt-10 mb-10">
-            <div className="flex items-center justify-between">
-                <h1 className="font-semibold text-lg">Cart</h1>
-                <div className="flex items-center space-x-5">
-                    <h1 className="font-semibold text-lg">Total cost: {total} $</h1>
-                    <details className="dropdown">
-                        <summary className="btn m-1">Sort By</summary>
-                        <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                            <li>
-                                <a onClick={() => handleBySort('price')}>Sort By Price</a>
-                            </li>
-                            
-                        </ul>
-                    </details>
-                    <button className="btn">Purchase</button>
-                </div>
-            </div>
-
-            <div className="space-y-10 mt-12">
-                {sorting.length > 0 ? (
-                    sorting.map((cartItem, i) => (
-                        <div className="flex justify-between items-center border-2 rounded-2xl" key={i}>
-                            <div className="w-1/4 mx-auto mr-7 p-3">
-                                <img className="object-cover h-36" src={cartItem.productImage} alt="product" />
-                            </div>
-                            <div className="w-2/4 mx-auto">
-                                <div className="flex justify-between items-center">
-                                    <h1 className="font-semibold text-xl mb-4">{cartItem.productTitle}</h1>
-                                    <button className="btn btn-outline rounded-full btn-sm">X</button>
-                                </div>
-                                <p className="font-normal text-lg2 text-slate-400 mb-4">{cartItem.description}</p>
-                                <p className="font-semibold text-lg">Price: ${cartItem.price}</p>
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <p>Your cart is empty.</p>
-                )}
-            </div>
+  return (
+    <div className="mt-10 mb-10">
+      <div className="flex items-center justify-between">
+        <h1 className="font-semibold text-lg">Cart</h1>
+        <div className="flex items-center space-x-5">
+          <h1 className="font-semibold text-lg">Total cost: {total} $</h1>
+          <button 
+          onClick={()=>handleBySort('price')}
+          className="flex items-center gap-2 btn-outline btn rounded-full border-[#9538E2] hover:bg-[#9538E2] text-[#9538E2]">
+            Sort by Price <FaSort></FaSort>
+          </button>
+          <button onClick={handlePurchase} className="btn">
+            Purchase
+          </button>
         </div>
-    );
+      </div>
+
+      <div className="space-y-10 mt-12">
+        {sorting.length > 0 ? (
+          sorting.map((cartItem, i) => (
+            <div
+              className="flex justify-between items-center border-2 rounded-2xl"
+              key={i}
+            >
+              <div className="w-1/4 mx-auto mr-7 p-3">
+                <img
+                  className="object-cover h-36"
+                  src={cartItem.productImage}
+                  alt="product"
+                />
+              </div>
+              <div className="w-2/4 mx-auto">
+                <div className="flex justify-between items-center">
+                  <h1 className="font-semibold text-xl mb-4">
+                    {cartItem.productTitle}
+                  </h1>
+                  <button onClick={()=>removeFromCart(cartItem.productId)} className="btn btn-outline rounded-full btn-sm">
+                    X
+                  </button>
+                </div>
+                <p className="font-normal text-lg2 text-slate-400 mb-4">
+                  {cartItem.description}
+                </p>
+                <p className="font-semibold text-lg">
+                  Price: ${cartItem.price}
+                </p>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="w-[80%] mx-auto">
+            <img className="w-1/2 mx-auto" src="../emptyCart.png" alt="" />
+            <p className="text-center font-bold text-2xl pb-7 pt-4">select your item first</p>
+          </div>
+        )}
+      </div>
+
+      <dialog ref={modalRef} className="modal">
+        <div className="modal-box">
+          <div className="flex items-center justify-center">
+            <img src="../Group.png" alt="" />
+          </div>
+          <div className="text-center space-y-4 mt-4">
+            <h1 className="font-bold text-xl">Payment Successfull</h1>
+            <p>Thanks For Purchasing</p>
+            <p>Total : {total}</p>
+          </div>
+          <div className="flex w-full">
+            <form onSubmit={(e)=>e.preventDefault()} className="w-full flex">
+              <NavLink className="btn w-[80%] mx-auto mt-2" to={'/'}><button  onClick={() => modalRef.current.close()} >Close</button></NavLink>
+            </form>
+          </div>
+        </div>
+      </dialog>
+    </div>
+  );
 }
+
+
