@@ -1,17 +1,25 @@
 
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "./CartContext";
 
 export default function Cart() {
-  const { cartItems } = useContext(CartContext); // Access context
-
+    const { cartItems } = useContext(CartContext); // Access context
+    
+    const [total, setTotal] = useState(0);
+  
+    useEffect(() => {
+      // Calculate total price from cartItems
+      const newTotal = cartItems.reduce((acc, item) => acc + item.price, 0);
+      setTotal(newTotal);
+    }, [cartItems]);
+console.log(cartItems.price)
   return (
     <div className="mt-10 mb-10 ">
       <div className="flex items-center justify-between">
-        <h1>Cart</h1>
+        <h1 className="font-semibold text-lg">Cart</h1>
         <div className="flex items-center space-x-5">
-          <h1>Total cost: </h1>
+          <h1 className="font-semibold text-lg">Total cost: {total} $</h1>
           <button className="btn btn-outline">Sort by Price</button>
           <button className="btn">Purchase</button>
         </div>
