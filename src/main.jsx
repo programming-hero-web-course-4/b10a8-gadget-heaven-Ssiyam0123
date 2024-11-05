@@ -12,6 +12,8 @@ import AllCards from './components/AllCards.jsx';
 import Statistics from './components/Pages/Statistics.jsx';
 import DashBoard from './components/Pages/DashBoard.jsx';
 import CardDetails from './components/Pages/CardDetails.jsx';
+import Cart from './components/Cart.jsx';
+import WishList from './components/WishList.jsx';
 
 const router = createBrowserRouter([
   {
@@ -46,7 +48,18 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard',
-        element: <DashBoard />
+        element: <DashBoard />,
+        loader: ()=> fetch ('../data.json'),
+        children:[
+          {
+            path: '/dashboard',
+            element: <Cart></Cart>
+          },
+          {
+            path: '/dashboard/wishlist',
+            element: <WishList/>
+          }
+        ]
       }
     ]
   },

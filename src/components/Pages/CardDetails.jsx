@@ -3,24 +3,41 @@ import { FaCartPlus, FaDollarSign, FaHeart } from "react-icons/fa";
 import { useLoaderData, useParams } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import { CartContext } from "../CartContext";
+import { toast } from "react-toastify";
+import { FavContext } from "../FavouriteContext";
 
 export default function CardDetails() {
   const details = useLoaderData();
   const { id } = useParams();
   const [cards, setCards] = useState(false);
+  const { addToCart } = useContext(CartContext);
+ const{ cartItems} = useContext(CartContext)
 
+const {favItem} = useContext(FavContext)
+const { addToFav } = useContext(FavContext)
 
   useEffect(() => {
     const singleData = details.find((card) => card.productId == id);
     setCards(singleData);
   }, [details, id]);
 
-  const { addToCart } = useContext(CartContext);
+ console.log(cartItems)
 
-  const handleAddToCart = (data) =>{
-    addToCart(data)
-    console.log(data)
-  }
+  const handleAddToCart = (data) => {
+
+     addToCart(data)
+};
+
+    const handleToAddFav = (data) =>{
+        const isExisted = favItem.find((item) => item.productId === data.productId);
+        if (isExisted) {
+            return toast.error('Item is already in the cart');    }
+        else {
+            addToFav(data);
+            return toast.success('Item added to cart');
+        }
+    }
+
 
   const {
     productTitle,
@@ -73,30 +90,35 @@ export default function CardDetails() {
           <p className="font-bold text-lg mb-2 mt-4">Specification:</p>
           <ul>
             {specification?.map((info, i) => (
-              <li className="list-disc text-slate-400" key={i}>{info}</li>
+              <li className="list-decimal text-slate-400" key={i}>
+                {info}
+              </li>
             ))}
           </ul>
 
           <p className="font-bold text-lg mt-4 mb-4">Rating</p>
-         <div className="flex items-center gap-5">
-         <ReactStars
-            count={5}
-            value={rating} // Assuming rating is a number from 0 to 5
-            edit={false} // Disable editing
-            size={24}
-            activeColor="#F9C004"
-          />
-          <button className="btn btn-sm">{rating}</button>
-         </div>
+          <div className="flex items-center gap-5">
+            <ReactStars
+              count={5}
+              value={rating} // Assuming rating is a number from 0 to 5
+              edit={false} // Disable editing
+              size={24}
+              activeColor="#F9C004"
+            />
+            <button className="btn btn-sm">{rating}</button>
+          </div>
 
           <div className="flex mt-5 gap-5">
             <button
-            onClick={()=>handleAddToCart(cards)}
-            className="flex btn rounded-full bg-[#9037D9] text-white">
+              onClick={() => handleAddToCart(cards)}
+              className="flex btn rounded-full bg-[#9037D9] text-white"
+            >
               Add To Cart <FaCartPlus />
             </button>
 
-            <button className="btn rounded-full border-2 bg-white">
+            <button 
+            onClick={()=> handleToAddFav(cards)}
+            className="btn rounded-full border-2 bg-white">
               <FaHeart />
             </button>
           </div>
