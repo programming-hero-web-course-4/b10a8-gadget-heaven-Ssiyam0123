@@ -10,36 +10,34 @@ export default function CardDetails() {
   const details = useLoaderData();
   const { id } = useParams();
   const [cards, setCards] = useState(false);
-  const [isFav, setFav] = useState(false)
+  const [isFav, setFav] = useState(false);
   const { addToCart } = useContext(CartContext);
- const{ cartItems} = useContext(CartContext)
+  const { cartItems } = useContext(CartContext);
 
-const {favItem} = useContext(FavContext)
-const { addToFav } = useContext(FavContext)
+  const { favItem } = useContext(FavContext);
+  const { addToFav } = useContext(FavContext);
 
   useEffect(() => {
     const singleData = details.find((card) => card.productId == id);
     setCards(singleData);
   }, [details, id]);
 
- console.log(cartItems)
+  console.log(cartItems);
 
   const handleAddToCart = (data) => {
+    addToCart(data);
+  };
 
-     addToCart(data)
-};
-
-    const handleToAddFav = (data) =>{
-        const isExisted = favItem.find((item) => item.productId === data.productId);
-        if (isExisted) {
-            return toast.error('Item is already in the cart');    }
-        else {
-            addToFav(data);
-            setFav(true)
-            return toast.success('Item added to cart');
-        }
+  const handleToAddFav = (data) => {
+    const isExisted = favItem.find((item) => item.productId === data.productId);
+    if (isExisted) {
+      return toast.error("Item is already in the cart");
+    } else {
+      addToFav(data);
+      setFav(true);
+      return toast.success("Item added to cart");
     }
-
+  };
 
   const {
     productTitle,
@@ -62,10 +60,10 @@ const { addToFav } = useContext(FavContext)
       </div>
 
       <div className="w-8/12 mx-auto relative bottom-16 rounded-2xl z-50 bg-white lg:flex p-5 items-center justify-center">
-        <div className="w-1/3 mx-auto">
+        <div className="w-full sm:w-1/2 lg:w-1/3 mx-auto">
           <img
             src={productImage}
-            className="w-[90%] mx-auto rounded-2xl object-cover"
+            className="w-full mx-auto rounded-2xl object-cover"
             alt=""
           />
         </div>
@@ -118,10 +116,11 @@ const { addToFav } = useContext(FavContext)
               Add To Cart <FaCartPlus />
             </button>
 
-            <button 
-            onClick={()=> handleToAddFav(cards)}
-            disabled={isFav}
-            className="btn rounded-full border-2 bg-white">
+            <button
+              onClick={() => handleToAddFav(cards)}
+              disabled={isFav}
+              className="btn rounded-full border-2 bg-white"
+            >
               <FaHeart />
             </button>
           </div>

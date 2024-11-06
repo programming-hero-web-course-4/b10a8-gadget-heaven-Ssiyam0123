@@ -9,26 +9,21 @@ export default function WishList() {
 
   const handleAddToCardButton = (item) =>{
         addToCart(item)
-        // const isExistInFav = favItem.find(fav => fav.productId == item.productId);
-        // if(isExistInFav){
-
-        //     removeFromFav(item.productId)
-        // }
   }
 
   return (
-    <div>
-      <h1 className="font-semibold text-lg mt-10 mb-10">WishList</h1>
-      <div>
+    <div className="mt-10 mb-10">
+      <h1 className="font-semibold text-lg ">WishList</h1>
+      <div className="space-y-10 mt-12">
         {favItem.length === 0 ? (
           <p className="font-bold text-6xl text-center mb-10"> No items in your wishlist</p>
         ) : (
           favItem.map((item, index) => (
             <div 
-            className="flex border-2 rounded-2xl"
+            className="flex flex-col sm:flex-row border-2 rounded-2xl p-4 space-y-4 sm:space-y-0 sm:space-x-6"
             key={index}>
-              <div className="w-1/3">
-                <img className="rounded-full" src={item.productImage} alt={item.productTitle} />
+               <div className="w-full sm:w-1/4">
+                <img className="w-full h-auto sm:h-36 rounded-xl object-cover" src={item.productImage} alt={item.productTitle} />
               </div>
               <div>
              <h2 className="font-semibold text-xl mb-4">{item.productTitle}</h2>

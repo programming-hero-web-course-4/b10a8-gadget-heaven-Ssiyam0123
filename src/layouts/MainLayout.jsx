@@ -11,11 +11,13 @@ export default function MainLayout() {
     <CartProvider>
       <FavProvider>
         <ToastContainer />
-        <div className="h-16">
+       <div className="bg-[#F7F7F7]">
+       <div className="h-16">
           <Navbar></Navbar>
         </div>
         <Outlet></Outlet>
         <Footer></Footer>
+       </div>
       </FavProvider>
     </CartProvider>
   );

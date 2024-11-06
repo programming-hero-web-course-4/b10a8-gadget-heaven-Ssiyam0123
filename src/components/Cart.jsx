@@ -29,52 +29,55 @@ export default function Cart() {
 
   return (
     <div className="mt-10 mb-10">
-      <div className="flex items-center justify-between">
-        <h1 className="font-semibold text-lg">Cart</h1>
-        <div className="flex items-center space-x-5">
-          <h1 className="font-semibold text-lg">Total cost: {total} $</h1>
-          <button 
-          onClick={()=>handleBySort('price')}
-          className="flex items-center gap-2 btn-outline btn rounded-full border-[#9538E2] hover:bg-[#9538E2] text-[#9538E2]">
-            Sort by Price <FaSort></FaSort>
-          </button>
-          <button onClick={handlePurchase} className="btn">
-            Purchase
-          </button>
-        </div>
-      </div>
+  <div className="flex flex-col sm:flex-row items-center justify-between sm:space-x-5 py-4">
+  <h1 className="font-semibold text-lg">Cart</h1>
+  <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-5">
+    <h1 className="font-semibold text-lg">Total cost: {total} $</h1>
+    <button 
+      onClick={() => handleBySort('price')}
+      className="flex items-center gap-2 btn-outline btn rounded-full border-[#9538E2] hover:bg-[#9538E2] text-[#9538E2]"
+    >
+      Sort by Price <FaSort />
+    </button>
+    <button onClick={handlePurchase} className="btn">
+      Purchase
+    </button>
+  </div>
+</div>
+
 
       <div className="space-y-10 mt-12">
         {sorting.length > 0 ? (
           sorting.map((cartItem, i) => (
             <div
-              className="flex justify-between items-center border-2 rounded-2xl"
-              key={i}
-            >
-              <div className="w-1/4 mx-auto mr-7 p-3">
-                <img
-                  className="object-cover h-36"
-                  src={cartItem.productImage}
-                  alt="product"
-                />
-              </div>
-              <div className="w-2/4 mx-auto">
-                <div className="flex justify-between items-center">
-                  <h1 className="font-semibold text-xl mb-4">
-                    {cartItem.productTitle}
-                  </h1>
-                  <button onClick={()=>removeFromCart(cartItem.productId)} className="btn btn-outline rounded-full btn-sm">
-                    X
-                  </button>
-                </div>
-                <p className="font-normal text-lg2 text-slate-400 mb-4">
-                  {cartItem.description}
-                </p>
-                <p className="font-semibold text-lg">
-                  Price: ${cartItem.price}
-                </p>
-              </div>
+            className="flex flex-col sm:flex-row justify-between items-center border-2 rounded-2xl p-4 mb-4"
+            key={i}
+          >
+            <div className="w-full sm:w-1/4 mx-auto mb-4 sm:mb-0">
+              <img
+                className="object-cover w-full h-auto sm:h-36 rounded-xl"
+                src={cartItem.productImage}
+                alt="product"
+              />
             </div>
+            <div className="w-full sm:w-2/4 mx-auto">
+              <div className="flex justify-between items-center">
+                <h1 className="font-semibold text-xl mb-4">
+                  {cartItem.productTitle}
+                </h1>
+                <button onClick={() => removeFromCart(cartItem.productId)} className="btn btn-outline rounded-full btn-sm">
+                  X
+                </button>
+              </div>
+              <p className="font-normal text-lg text-slate-400 mb-4">
+                {cartItem.description}
+              </p>
+              <p className="font-semibold text-lg">
+                Price: ${cartItem.price}
+              </p>
+            </div>
+          </div>
+          
           ))
         ) : (
           <div className="w-[80%] mx-auto">

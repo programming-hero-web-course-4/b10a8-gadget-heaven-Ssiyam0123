@@ -12,7 +12,7 @@ export default function Card({product}) {
 
     return (
         <div>
-            <div className="card bg-base-100 shadow-xl">
+            <div className="card border-2">
       <figure className="px-10 pt-10">
         <img
           src={productImage}
@@ -21,12 +21,12 @@ export default function Card({product}) {
       </figure>
       <div className="card-body h-52">
         <h2 className="card-title">{productTitle}</h2>
-        <p>{price}</p>
+        <p>Price:{price}$</p>
         <div className="card-actions">
           <NavLink 
 
         to={`/cardDetails/${productId}`} 
-        className="btn border-[#BC7EE3] bg-white hover:bg-[#BC7EE3] hover:text-white"
+        className="btn rounded-full text-[#53008C] border-[#BC7EE3] bg-white hover:bg-[#BC7EE3] hover:text-white"
     >
         View Details
     </NavLink>
