@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { CartContext } from "./CartContext";
 import { FavContext } from "./FavouriteContext";
 import { FaSort } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 export default function Cart() {
   const { cartItems, removeFromCart } = useContext(CartContext);
   const [sorting, setSortBy] = useState([]);
@@ -14,8 +14,10 @@ export default function Cart() {
     }
   };
 
+const navigate = useNavigate();
+
   const handlePurchaseButton = () => {
-    cartItems.forEach(element => removeFromCart(element.productId))
+    cartItems.forEach((element) => removeFromCart(element.productId));
     setTotal(0);
     modalRef.current.close();
   };
@@ -45,6 +47,7 @@ export default function Cart() {
             Sort by Price <FaSort />
           </button>
           <button
+          disabled={cartItems.length === 0}
             className="bg-[#9538E2] text-white btn rounded-full"
             onClick={() => handlePurchase(sorting)}
           >
@@ -99,7 +102,7 @@ export default function Cart() {
       </div>
 
       <dialog ref={modalRef} className="modal">
-        <div className="modal-box">
+        <div className="modal-box flex flex-col">
           <div className="flex items-center justify-center">
             <img src="../Group.png" alt="" />
           </div>
@@ -108,11 +111,19 @@ export default function Cart() {
             <p>Thanks For Purchasing</p>
             <p>Total : {total}</p>
           </div>
-          <div className="flex w-full">
-            <form onSubmit={(e) => e.preventDefault()} className="w-full flex">
-              <NavLink onClick={() => handlePurchaseButton()}>
-                <div className="flex w-44 mx-auto text-center"><button className="btn w-full">Close</button></div>
-              </NavLink>
+          <div className="flex w-full justify-center">
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="w-full flex justify-center"
+            >
+              
+                <div className="w-44 text-center">
+                  <button
+                   disabled={cartItems.length === 0}
+                  onClick={()=> {handlePurchaseButton(); navigate('/')}}
+                  className="btn w-full">Close</button>
+                </div>
+
             </form>
           </div>
         </div>
