@@ -10,7 +10,7 @@ export default function NewsPage() {
 <div className='mb-10'>
   <div className="flex flex-col items-center justify-center py-20 bg-gradient-to-r from-[#9538E2] to-[#9538E2] pb-12">
     <h1 className="text-5xl font-bold mb-4 text-white">Tech News</h1>
-    <p className="text-lg font-normal mb-8 text-white w-[95%] mx-auto">
+    <p className="text-lg font-normal mb-8 text-white w-[95%] mx-auto text-center">
       Stay updated with the latest breakthroughs in technology. From cutting-edge gadgets to revolutionary software, explore what's making waves in the tech world today!
     </p>
   </div>

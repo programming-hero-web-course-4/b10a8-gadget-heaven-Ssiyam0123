@@ -8,10 +8,11 @@ export default function Navbar() {
   const { cartItems } = useContext(CartContext);
   const { favItem } = useContext(FavContext);
   const location = useLocation();
-  const navBarColor = location.pathname === '/' ? 'bg-[#9538E2] text-white w-[95%] mx-auto rounded-t-2xl mt-5' : 'bg-base-100 mt-5 w-[95%] mx-auto';
+  const navBarColor = location.pathname === '/' ? 'bg-[#9538E2] text-white w-[95%] mx-auto rounded-t-2xl mt-5' : 'bg-[F7F7F7] mt-5 w-[95%] mx-auto';
 
   const links = (
-    <div className="space-x-5 sm:flex-col md:flex-row sm:items-center sm:justify-center sm:text-center sm:space-y-2 lg:space-y-0 flex items-center justify-center text-center">
+    <div className="flex flex-col lg:flex-row items-center justify-center text-center space-x-5 sm:space-x-0 sm:space-y-2 lg:space-y-0">
+
       <li>
         <NavLink to={"/"}>Home</NavLink>
       </li>
@@ -37,7 +38,7 @@ export default function Navbar() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
               </svg>
             </div>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-slate-600 rounded-box z-[1] mt-3 w-52 p-2 shadow">
               {links}
             </ul>
           </div>

@@ -7,7 +7,7 @@ export default function DashboardButtons() {
     <div className="bg-[#F7F7F7]">
       <div className="flex flex-col items-center justify-center py-20 bg-gradient-to-r from-[#9538E2] to-[#9538E2] pb-12">
         <h1 className="text-5xl font-bold mb-4 text-white">Dashboard</h1>
-        <p className="text-lg font-normal mb-8 text-white w-[95%] mx-auto">
+        <p className="text-lg font-normal mb-8 text-white w-[95%] mx-auto text-center">
           Explore the latest gadgets that will take your experience to the next
           level. From smart devices to the coolest accessories, we have it all!
         </p>
