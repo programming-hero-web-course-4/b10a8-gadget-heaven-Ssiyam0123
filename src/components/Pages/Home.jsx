@@ -22,10 +22,10 @@ export default function Home() {
 </div>
 
 
-     <div className="w-full sm:w-10/12 lg:w-8/12 mx-auto relative bottom-16 rounded-2xl z-50">
+     <div className="w-full sm:w-10/12 lg:w-8/12 mx-auto relative bottom-16 z-50">
   <img
     src="../banner.jpg"
-    className="max-w-[75%] mx-auto rounded-3xl object-cover border-2 p-4"
+    className="max-w-[75%] mx-auto rounded-2xl object-cover border-2 p-4"
     alt=""
   />
 </div>

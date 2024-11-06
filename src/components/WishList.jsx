@@ -23,7 +23,7 @@ export default function WishList() {
             className="flex flex-col sm:flex-row border-2 rounded-2xl p-4 space-y-4 sm:space-y-0 sm:space-x-6"
             key={index}>
                <div className="w-full sm:w-1/4">
-                <img className="w-full h-auto sm:h-36 rounded-xl object-cover" src={item.productImage} alt={item.productTitle} />
+                <img className="w-full h-auto sm:h-36 rounded-xl " src={item.productImage} alt={item.productTitle} />
               </div>
               <div>
              <h2 className="font-semibold text-xl mb-4">{item.productTitle}</h2>

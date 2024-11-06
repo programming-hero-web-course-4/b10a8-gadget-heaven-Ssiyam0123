@@ -22,10 +22,14 @@ export default function CardDetails() {
     setCards(singleData);
   }, [details, id]);
 
-  console.log(cartItems);
+  const [userRating, setUserRating] = useState(4);
 
   const handleAddToCart = (data) => {
     addToCart(data);
+  };
+
+  const outOfStock = () => {
+    return toast.error("Out of stock");
   };
 
   const handleToAddFav = (data) => {
@@ -35,7 +39,7 @@ export default function CardDetails() {
     } else {
       addToFav(data);
       setFav(true);
-      return toast.success("Item added to cart");
+      return toast.success("Item added to wish list");
     }
   };
 
@@ -100,21 +104,30 @@ export default function CardDetails() {
           <div className="flex items-center gap-5">
             <ReactStars
               count={5}
-              value={rating} // Assuming rating is a number from 0 to 5
-              edit={false} // Disable editing
+              value={userRating}
+              onChange={(newRating) => setUserRating(newRating)}
               size={24}
-              activeColor="#F9C004"
+              activeColor="#ffd700"
             />
-            <button className="btn btn-sm">{rating}</button>
+            ,<button className="btn btn-sm">{rating}</button>
           </div>
 
           <div className="flex mt-5 gap-5">
-            <button
-              onClick={() => handleAddToCart(cards)}
-              className="flex btn rounded-full bg-[#9037D9] text-white"
-            >
-              Add To Cart <FaCartPlus />
-            </button>
+            {availability ? (
+              <button
+                onClick={() => handleAddToCart(cards)}
+                className="flex btn rounded-full bg-[#9037D9] text-white"
+              >
+                Add To Cart <FaCartPlus />
+              </button>
+            ) : (
+              <button
+                onClick={outOfStock}
+                className="flex btn rounded-full bg-red-600 text-white"
+              >
+                Out of Stock <FaCartPlus />
+              </button>
+            )}
 
             <button
               onClick={() => handleToAddFav(cards)}

@@ -2,9 +2,6 @@ import React from "react";
 import Cart from "../Cart";
 import { NavLink, Outlet, useLoaderData } from "react-router-dom";
 export default function DashboardButtons({ isInCartPage }) {
-  // const data = useLoaderData()
-  // console.log(data)
-
   return (
     <div className="bg-[#F7F7F7]">
       <div className="flex flex-col items-center justify-center py-20 bg-gradient-to-r from-[#9538E2] to-[#9538E2] pb-12">

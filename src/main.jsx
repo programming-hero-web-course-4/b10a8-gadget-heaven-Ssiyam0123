@@ -15,6 +15,7 @@ import CardDetails from './components/Pages/CardDetails.jsx';
 import Cart from './components/Cart.jsx';
 import WishList from './components/WishList.jsx';
 import ErrorPage from './components/Pages/ErrorPage.jsx';
+import NewsPage from './components/Pages/NewsPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -63,6 +64,11 @@ const router = createBrowserRouter([
             element: <WishList/>
           }
         ]
+      },
+      {
+        path: '/news',
+        element: <NewsPage></NewsPage>,
+        loader: () => fetch('../news.json')
       }
     ]
   },
