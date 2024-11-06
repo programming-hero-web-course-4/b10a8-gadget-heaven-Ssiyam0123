@@ -11,8 +11,8 @@ export default function Card({product}) {
 
 
     return (
-        <div>
-            <div className="card border-2">
+        <div >
+            <div className="card border-2 bg-white">
       <figure className="px-10 pt-10">
         <img
           src={productImage}

@@ -6,8 +6,8 @@ export default function Home() {
   const categories = useLoaderData();
   //   console.log(categories);
   return (
-    <div className="w-11/12 mx-auto">
-     <div className="flex flex-col items-center justify-center py-16 sm:py-20 lg:py-24 bg-gradient-to-r from-[#9538E2] to-[#9538E2] rounded-2xl text-center">
+    <div className="w-[95%] mx-auto">
+     <div className="flex flex-col items-center justify-center py-16 sm:py-20 lg:py-24 bg-gradient-to-r from-[#9538E2] to-[#9538E2] rounded-b-2xl text-center">
   <h1 className="w-[95%] mx-auto font-bold text-3xl mb-4 text-white">
   Upgrade Your Tech Accessorize with Gadget Heaven Accessories  </h1>
   <p className="w-[95%] mx-auto  font-normal mb-6 lg:mb-8 text-white">

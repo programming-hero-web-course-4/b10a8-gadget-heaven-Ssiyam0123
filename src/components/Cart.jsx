@@ -3,6 +3,7 @@ import { CartContext } from "./CartContext";
 import { FavContext } from "./FavouriteContext";
 import { FaSort } from "react-icons/fa";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 export default function Cart() {
   const { cartItems, removeFromCart } = useContext(CartContext);
   const [sorting, setSortBy] = useState([]);
@@ -20,6 +21,7 @@ const navigate = useNavigate();
     cartItems.forEach((element) => removeFromCart(element.productId));
     setTotal(0);
     modalRef.current.close();
+    toast.success('Thanks for shoping')
   };
 
   const handlePurchase = () => {
