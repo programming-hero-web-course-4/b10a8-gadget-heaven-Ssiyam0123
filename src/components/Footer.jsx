@@ -4,6 +4,10 @@ export default function Footer() {
   return (
     <div>
         <footer className="footer bg-neutral text-neutral-content p-10">
+      <div className='text-center'>
+        <h1 className='font-bold text-2xl'>Gadget Heaven</h1>
+        <p>Leading the way in cutting-edge technology and innovation.</p>
+      </div>
   <nav>
     <h6 className="footer-title">Services</h6>
     <a className="link link-hover">Branding</a>

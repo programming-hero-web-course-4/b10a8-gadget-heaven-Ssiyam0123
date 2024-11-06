@@ -15,9 +15,9 @@ export default function Home() {
           Your go-to destination for the latest and greatest gadgets.
         </p>
 
-        <button className="px-6 py-3 bg-white text-[#9538E2] font-semibold rounded-full transition">
+        <a href='#shopNow' className="btn px-6 py-3 bg-white text-[#9538E2] font-semibold rounded-full transition">
           Shop Now
-        </button>
+        </a>
       </div>
 
       <div className="w-8/12 mx-auto relative bottom-16 rounded-2xl z-50">
@@ -28,7 +28,7 @@ export default function Home() {
       </div>
 
       <div>
-        <h1 className="text-center font-bold text-4xl mb-14">
+        <h1 id="shopNow" className="text-center font-bold text-4xl mb-14">
           Explore Cutting-Edge Gadgets
         </h1>
 

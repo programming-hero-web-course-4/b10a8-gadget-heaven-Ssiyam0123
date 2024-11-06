@@ -21,7 +21,7 @@ export default function WishList() {
       <h1 className="font-semibold text-lg mt-10 mb-10">WishList</h1>
       <div>
         {favItem.length === 0 ? (
-          <p>No items in your wishlist</p>
+          <p className="font-bold text-6xl text-center mb-10"> No items in your wishlist</p>
         ) : (
           favItem.map((item, index) => (
             <div 
